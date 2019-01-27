@@ -4,8 +4,8 @@ Uses the Random User Generator API to create an employee directory for Awesome S
 
 ## Motivation
 
-This is the fifth project in the Treehouse Full Stack JavaScript Techdegree program (version 2). I build the original version
-using Bootstrap but for practice I decided to build it again without using Bootstrap.
+This is a rebuild of the fifth project in the Treehouse Full Stack JavaScript Techdegree program. I built the original version
+using Bootstrap but for practice I decided to recreate it without using Bootstrap.
 
 ## Features
 
