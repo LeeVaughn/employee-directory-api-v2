@@ -26,7 +26,7 @@ $.getJSON(url, (data) => {
     // creates HTML elements for modal windows
     const $modalHTML = $(`
       <div class="modal-container">
-        <div class="modal ${[i]}">
+        <div class="modal modal${[i]}">
           <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
           <div class="modal-info-container">
             <img class="modal-img" src="${data.results[i].picture.large}" alt="profile picture">
@@ -51,17 +51,26 @@ $.getJSON(url, (data) => {
   }
 
   $(".card").click( (e) => {
-    index = e.currentTarget.id;
-    console.log(index);
-    console.log("clicked!");
-    $(`".modal-container .${index}"`).addClass("active");
+    // gets id of click target
+    const index = e.currentTarget.id;
+    // adds active class to corresponding .modal.container and .modal elements
+    $(`.modal${index}`).addClass("active");
+    $(`.modal${index}`).parent().addClass("active");
+
+    $(`.modal${index} > button`).click( (e) => {
+      console.log(e);
+      console.log("x clicked!");
+      $(`.modal${index}`).parent().removeClass("active");
+      $(`.modal${index}`).removeClass("active");
+    });
   });
 
-  $("#modal-close-btn").click( (e) => {
-    console.log(e);
-    console.log("x clicked!");
-    $(".modal-container, .modal").removeClass("active");
-  });
+  // $("button #modal-close-btn").click( (e) => {
+  //   console.log(e);
+  //   console.log("x clicked!");
+  //   $(".modal").removeClass("active");
+  //   $(".modal").parent().removeClass("active");
+  // });
 
   // append search bar
   $(".search-container").append($searchHTML);
