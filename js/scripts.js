@@ -1,8 +1,14 @@
 const url = "https://randomuser.me/api/?results=12&nat=us&exc=gender,registered,phone,id,nat&callback=?";
+// creates HTML elements for search bar
+const $searchHTML = $(`
+  <form action="#" method="get">
+    <input type="search" id="search-input" class="search-input" placeholder="Search...">
+    <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+  </form>
+`);
 
 // retreives data from the random user API
 $.getJSON(url, (data) => {
-  console.log(data.results);
   for (let i = 0; i < data.results.length; i++) {
     // creates HTML elements for basic employee cards
     const $userHTML = $(`
@@ -43,4 +49,7 @@ $.getJSON(url, (data) => {
     $("#gallery").append($userHTML);
     $($modalHTML).insertAfter("#gallery");
   }
+
+  // append search bar
+  $(".search-container").append($searchHTML);
 });
