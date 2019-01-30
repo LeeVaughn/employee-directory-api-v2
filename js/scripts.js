@@ -12,7 +12,7 @@ $.getJSON(url, (data) => {
   for (let i = 0; i < data.results.length; i++) {
     // creates HTML elements for basic employee cards
     const $userHTML = $(`
-      <div class="card">
+      <div id=${[i]} class="card">
         <div class="card-img-container">
           <img class="card-img" src="${data.results[i].picture.medium}" alt="profile picture">
         </div>
@@ -26,7 +26,7 @@ $.getJSON(url, (data) => {
     // creates HTML elements for modal windows
     const $modalHTML = $(`
       <div class="modal-container">
-        <div class="modal">
+        <div class="modal ${[i]}">
           <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
           <div class="modal-info-container">
             <img class="modal-img" src="${data.results[i].picture.large}" alt="profile picture">
@@ -49,6 +49,19 @@ $.getJSON(url, (data) => {
     $("#gallery").append($userHTML);
     $($modalHTML).insertAfter("#gallery");
   }
+
+  $(".card").click( (e) => {
+    index = e.currentTarget.id;
+    console.log(index);
+    console.log("clicked!");
+    $(`".modal-container .${index}"`).addClass("active");
+  });
+
+  $("#modal-close-btn").click( (e) => {
+    console.log(e);
+    console.log("x clicked!");
+    $(".modal-container, .modal").removeClass("active");
+  });
 
   // append search bar
   $(".search-container").append($searchHTML);
