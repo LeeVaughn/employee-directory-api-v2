@@ -57,20 +57,95 @@ $.getJSON(url, (data) => {
     $(`.modal${index}`).addClass("active");
     $(`.modal${index}`).parent().addClass("active");
 
-    $(`.modal${index} > button`).click( (e) => {
-      console.log(e);
-      console.log("x clicked!");
-      $(`.modal${index}`).parent().removeClass("active");
-      $(`.modal${index}`).removeClass("active");
-    });
+    // // adds listener to close button on active modal window
+    // $(`.modal${index} > button`).click( () => {
+    //   $(`.modal${index}`).parent().removeClass("active");
+    //   $(`.modal${index}`).removeClass("active");
+    // });
+    // // listens on prev button for active modal
+    // $(`.modal${index} ~ .modal-btn-container > #modal-prev`).click( () => {
+    //   console.log("prev");
+    //   $(`.modal${index - 1}`).addClass("active");
+    //   $(`.modal${index - 1}`).parent().addClass("active");
+    //   $(`.modal${index}`).parent().removeClass("active");
+    //   $(`.modal${index}`).removeClass("active");
+    // });
+    // // listens on next button for active modal
+    // $(`.modal${index} ~ .modal-btn-container > #modal-next`).click( () => {
+    //   console.log("next");
+    //   // $(`.modal${index}`).parent().removeClass("active");
+    //   // $(`.modal${index}`).removeClass("active");
+    // });
   });
 
-  // $("button #modal-close-btn").click( (e) => {
-  //   console.log(e);
-  //   console.log("x clicked!");
-  //   $(".modal").removeClass("active");
-  //   $(".modal").parent().removeClass("active");
-  // });
+  // adds listener to close button on active modal window
+  $(".modal > button").click( () => {
+    console.log("click");
+    $(".modal").parent().removeClass("active");
+    $(".modal").removeClass("active");
+  });
+
+  // listens on prev button for active modal
+  $(".modal ~ .modal-btn-container > #modal-prev").click( (e) => {
+    console.log("prev");
+    console.log(e)
+    // $(`.modal${index - 1}`).addClass("active");
+    // $(`.modal${index - 1}`).parent().addClass("active");
+    // $(`.modal${index}`).parent().removeClass("active");
+    // $(`.modal${index}`).removeClass("active");
+  });
+
+  // listens on next button for active modal
+  $(".modal ~ .modal-btn-container > #modal-next").click( () => {
+    console.log("next");
+    // $(`.modal${index}`).parent().removeClass("active");
+    // $(`.modal${index}`).removeClass("active");
+  });
+
+  // creates a keyup event handler on the input field
+  $("#search-input").keyup(function () {
+    // stores the user's search criteria in a variable
+    let $searchValue = $("#search-input").val().toLowerCase();
+    // will be set to true if search term matches employee list
+    let match = false;
+
+    // removes element with a class of message
+    $(".message").remove();
+
+    // loops through children of .user-section
+    for (let i = 0; i < $("#gallery").children().length; i++) {
+      // stores employee names and usernames in variables
+      let $name = $("#gallery #name").eq(i).text();
+
+      // adds class of true to .user if search term is detected or removes it if it isn't
+      if ($name.toLowerCase().includes($searchValue)) {
+        match = true;
+        $("#gallery #name").eq(i).closest(".user").addClass("true");
+      } else {
+        $("#gallery #name").eq(i).closest(".user").removeClass("true");
+      }
+    }
+
+    // Checks search results and responds based on the outcome
+    if (match === true) {
+      // hides elements that do not match search term
+      $("#gallery .card").not(".true").hide();
+    }
+    if (match === false) {
+      // creates a message and adds it to the DOM
+      let $message = $(`<p class="message">No employees were found with that name or username.</p>`);
+
+      // hides user section and appends message
+      $("#gallery .card").hide();
+      $("#gallery").append($message).show();
+    }
+    if ($searchValue === "") {
+      // removes element with a class of message
+      $(".message").remove();
+      // shows original employee list
+      $("#gallery .card").show();
+    }
+  });
 
   // append search bar
   $(".search-container").append($searchHTML);
