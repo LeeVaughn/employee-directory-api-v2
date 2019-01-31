@@ -12,6 +12,7 @@ $(".search-container").append($searchHTML);
 
 // retreives data from the random user API
 $.getJSON(url, (data) => {
+  console.log(data.results);
   for (let i = 0; i < data.results.length; i++) {
     // creates HTML elements for basic employee cards
     const $userHTML = $(`
@@ -38,7 +39,7 @@ $.getJSON(url, (data) => {
             <p class="modal-text cap">${data.results[i].location.city}</p>
             <hr>
             <p class="modal-text">${data.results[i].cell}</p>
-            <p class="modal-text">${data.results[i].location.street}, ${data.results[i].location.city}, ${data.results[i].location.state}, ${data.results[i].location.postcode}</p>
+            <p class="modal-text cap">${data.results[i].location.street}, ${data.results[i].location.city}, ${data.results[i].location.state}, ${data.results[i].location.postcode}</p>
             <p class="modal-text">Birthday: ${data.results[i].dob.date.slice(5, 7)}/${data.results[i].dob.date.slice(8, 10)}/${data.results[i].dob.date.slice(2, 4)}</p>
           </div>
         </div> 
