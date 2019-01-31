@@ -94,6 +94,11 @@ header h1 {
     overflow: hidden;
 }
 
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 3px 2px #888888;
+}
+
 .card-img {
     width: 95px;
     margin: 10px 15px auto 10px;
