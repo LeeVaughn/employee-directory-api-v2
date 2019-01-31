@@ -7,6 +7,9 @@ const $searchHTML = $(`
   </form>
 `);
 
+// append search bar
+$(".search-container").append($searchHTML);
+
 // retreives data from the random user API
 $.getJSON(url, (data) => {
   for (let i = 0; i < data.results.length; i++) {
@@ -120,9 +123,9 @@ $.getJSON(url, (data) => {
       // adds class of true to .user if search term is detected or removes it if it isn't
       if ($name.toLowerCase().includes($searchValue)) {
         match = true;
-        $("#gallery #name").eq(i).closest(".user").addClass("true");
+        $("#gallery #name").eq(i).closest(".card").addClass("true");
       } else {
-        $("#gallery #name").eq(i).closest(".user").removeClass("true");
+        $("#gallery #name").eq(i).closest(".card").removeClass("true");
       }
     }
 
@@ -146,7 +149,4 @@ $.getJSON(url, (data) => {
       $("#gallery .card").show();
     }
   });
-
-  // append search bar
-  $(".search-container").append($searchHTML);
 });
