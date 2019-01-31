@@ -59,50 +59,40 @@ $.getJSON(url, (data) => {
     // adds active class to corresponding .modal.container and .modal elements
     $(`.modal${index}`).addClass("active");
     $(`.modal${index}`).parent().addClass("active");
-
-    // // adds listener to close button on active modal window
-    // $(`.modal${index} > button`).click( () => {
-    //   $(`.modal${index}`).parent().removeClass("active");
-    //   $(`.modal${index}`).removeClass("active");
-    // });
-    // // listens on prev button for active modal
-    // $(`.modal${index} ~ .modal-btn-container > #modal-prev`).click( () => {
-    //   console.log("prev");
-    //   $(`.modal${index - 1}`).addClass("active");
-    //   $(`.modal${index - 1}`).parent().addClass("active");
-    //   $(`.modal${index}`).parent().removeClass("active");
-    //   $(`.modal${index}`).removeClass("active");
-    // });
-    // // listens on next button for active modal
-    // $(`.modal${index} ~ .modal-btn-container > #modal-next`).click( () => {
-    //   console.log("next");
-    //   // $(`.modal${index}`).parent().removeClass("active");
-    //   // $(`.modal${index}`).removeClass("active");
-    // });
   });
 
   // adds listener to close button on active modal window
   $(".modal > button").click( () => {
-    console.log("click");
     $(".modal").parent().removeClass("active");
     $(".modal").removeClass("active");
   });
 
-  // listens on prev button for active modal
+  // listens on prev button of active modal
   $(".modal ~ .modal-btn-container > #modal-prev").click( (e) => {
-    console.log("prev");
-    console.log(e)
-    // $(`.modal${index - 1}`).addClass("active");
-    // $(`.modal${index - 1}`).parent().addClass("active");
-    // $(`.modal${index}`).parent().removeClass("active");
-    // $(`.modal${index}`).removeClass("active");
+    // selects current active modal
+    let currentModal = $(".modal-container.active");
+    // selects preceeding modal
+    let prevModal = $(currentModal).next();
+
+    // removes active class from current modal and adds it to preceeding modal
+    $(".modal").parent().removeClass("active");
+    $(".modal").removeClass("active");
+    prevModal.addClass("active");
+    prevModal.children(".modal").addClass("active");
   });
 
-  // listens on next button for active modal
+  // listens on next button of active modal
   $(".modal ~ .modal-btn-container > #modal-next").click( () => {
-    console.log("next");
-    // $(`.modal${index}`).parent().removeClass("active");
-    // $(`.modal${index}`).removeClass("active");
+    // selects current active modal
+    let currentModal = $(".modal-container.active");
+    // selects next modal
+    let nextModal = $(currentModal).prev();
+
+    // removes active class from current modal and adds it to preceeding modal
+    $(".modal").parent().removeClass("active");
+    $(".modal").removeClass("active");
+    nextModal.addClass("active");
+    nextModal.children(".modal").addClass("active");
   });
 
   // creates a keyup event handler on the input field
