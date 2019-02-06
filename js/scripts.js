@@ -54,9 +54,9 @@ $.getJSON(url, (data) => {
     $($modalHTML).insertAfter("#gallery");
   }
 
-  $(".card").click( (e) => {
+  $(".card").click( (event) => {
     // gets id of click target
-    const index = e.currentTarget.id;
+    const index = event.currentTarget.id;
     // adds active class to corresponding .modal.container and .modal elements
     $(`.modal${index}`).addClass("active");
     $(`.modal${index}`).parent().addClass("active");
@@ -69,11 +69,11 @@ $.getJSON(url, (data) => {
   });
 
   // listens on prev button of active modal
-  $(".modal ~ .modal-btn-container > #modal-prev").click( (e) => {
+  $(".modal ~ .modal-btn-container > #modal-prev").click( () => {
     // selects current active modal
-    let currentModal = $(".modal-container.active");
+    const currentModal = $(".modal-container.active");
     // selects preceeding modal
-    let prevModal = $(currentModal).next();
+    const prevModal = $(currentModal).next();
 
     // removes active class from current modal and adds it to preceeding modal
     $(".modal").parent().removeClass("active");
@@ -85,9 +85,9 @@ $.getJSON(url, (data) => {
   // listens on next button of active modal
   $(".modal ~ .modal-btn-container > #modal-next").click( () => {
     // selects current active modal
-    let currentModal = $(".modal-container.active");
+    const currentModal = $(".modal-container.active");
     // selects next modal
-    let nextModal = $(currentModal).prev();
+    const nextModal = $(currentModal).prev();
 
     // removes active class from current modal and adds it to preceeding modal
     $(".modal").parent().removeClass("active");
@@ -99,7 +99,7 @@ $.getJSON(url, (data) => {
   // creates a keyup event handler on the input field
   $("#search-input").keyup(function () {
     // stores the user's search criteria in a variable
-    let $searchValue = $("#search-input").val().toLowerCase();
+    const $searchValue = $("#search-input").val().toLowerCase();
     // will be set to true if search term matches employee list
     let match = false;
 
@@ -109,7 +109,7 @@ $.getJSON(url, (data) => {
     // loops through children of .user-section
     for (let i = 0; i < $("#gallery").children().length; i++) {
       // stores employee names and usernames in variables
-      let $name = $("#gallery #name").eq(i).text();
+      const $name = $("#gallery #name").eq(i).text();
 
       // adds class of true to .user if search term is detected or removes it if it isn't
       if ($name.toLowerCase().includes($searchValue)) {
@@ -127,7 +127,7 @@ $.getJSON(url, (data) => {
     }
     if (match === false) {
       // creates a message and adds it to the DOM
-      let $message = $(`<p class="message">No employees were found with that name or username.</p>`);
+      const $message = $(`<p class="message">No employees were found with that name or username.</p>`);
 
       // hides user section and appends message
       $("#gallery .card").hide();
