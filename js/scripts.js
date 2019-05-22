@@ -12,7 +12,6 @@ $(".search-container").append($searchHTML);
 
 // retreives data from the random user API
 $.getJSON(url, (data) => {
-  console.log(data.results);
   for (let i = 0; i < data.results.length; i++) {
     // creates HTML elements for basic employee cards
     const $userHTML = $(`
