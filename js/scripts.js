@@ -10,8 +10,9 @@ const $searchHTML = $(`
 // append search bar
 $(".search-container").append($searchHTML);
 
-// retreives data from the random user API
+// retrieves data from the random user API
 $.getJSON(url, (data) => {
+  console.log(data)
   for (let i = 0; i < data.results.length; i++) {
     // creates HTML elements for basic employee cards
     const $userHTML = $(`
@@ -54,6 +55,7 @@ $.getJSON(url, (data) => {
   }
 
   $(".card").click( (event) => {
+    console.log(event)
     // gets id of click target
     const index = event.currentTarget.id;
     // adds active class to corresponding .modal.container and .modal elements
