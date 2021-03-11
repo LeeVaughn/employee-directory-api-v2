@@ -38,8 +38,8 @@ $.getJSON(url, (data) => {
             <p class="modal-text">${data.results[i].email}</p>
             <p class="modal-text cap">${data.results[i].location.city}</p>
             <hr>
-            <p class="modal-text">${data.results[i].cell}</p>
-            <p class="modal-text cap">${data.results[i].location.street}, ${data.results[i].location.city}, ${data.results[i].location.state}, ${data.results[i].location.postcode}</p>
+            <p class="modal-text">${data.results[i].cell.slice(0, 5)} ${data.results[i].cell.slice(6)}</p>
+            <p class="modal-text cap">${data.results[i].location.street.number} ${data.results[i].location.street.name}, ${data.results[i].location.city}, ${data.results[i].location.state}, ${data.results[i].location.postcode}</p>
             <p class="modal-text">Birthday: ${data.results[i].dob.date.slice(5, 7)}/${data.results[i].dob.date.slice(8, 10)}/${data.results[i].dob.date.slice(2, 4)}</p>
           </div>
         </div> 
